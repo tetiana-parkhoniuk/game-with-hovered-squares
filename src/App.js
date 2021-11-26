@@ -1,7 +1,7 @@
 import React, { useEffect } from 'react';
 import { useDispatch } from 'react-redux';
 import { presetsOperations } from 'redux/presets';
-import ModePicker from 'components/ModePicker/ModePicker';
+import Playground from 'components/ModePicker/ModePicker';
 import './App.css';
 
 function App() {
@@ -14,7 +14,7 @@ function App() {
   return (
     <div className="App">
       <header className="App-header">
-        <ModePicker />
+        <Playground />
       </header>
     </div>
   );

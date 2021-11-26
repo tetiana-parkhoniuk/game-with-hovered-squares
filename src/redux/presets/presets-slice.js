@@ -3,10 +3,17 @@ import { presetsOperations } from '.';
 
 const presetsSlice = createSlice({
   name: 'presets',
-  initialState: { modes: [], status: null, error: null },
+  initialState: {
+    modes: [],
+    grid: [],
+    isModeSelected: false,
+    isStarted: false,
+    status: null,
+    error: null,
+  },
   extraReducers: {
     [presetsOperations.fetchPresets.pending]: state => {
-      state.status = 'pending';
+      state.status = 'loading';
       state.error = null;
     },
     [presetsOperations.fetchPresets.fulfilled]: (state, { payload }) => {

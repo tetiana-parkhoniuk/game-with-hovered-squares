@@ -4,6 +4,7 @@ import { presetsOperations, presetsSelectors } from 'redux/presets';
 import ModePicker from 'components/ModePicker';
 import Button from 'components/Button';
 import Fields from 'components/Fields';
+import SquaresLogger from 'components/SquaresLogger/SquaresLogger';
 import styles from './App.module.css';
 
 function App() {
@@ -12,6 +13,7 @@ function App() {
   const [appMode, setAppMode] = useState();
   const [fieldSize, setFieldSize] = useState();
   const [isStarted, setStarted] = useState(false);
+  const [logs, setLogs] = useState([]);
 
   useEffect(() => {
     dispatch(presetsOperations.fetchPresets());
@@ -46,6 +48,11 @@ function App() {
     console.log('handleBtnClick:', fieldSize);
   };
 
+  const handleFieldHover = ({ row, col }) => {
+    const logText = `row ${row} col ${col}`;
+    setLogs([logText, ...logs]);
+  };
+
   return (
     <div className={styles.app}>
       <ModePicker options={modes} onChange={handleModePickerChange} />
@@ -54,7 +61,8 @@ function App() {
         onClick={handleBtnClick}
         isDisabled={!fieldSize}
       />
-      {isStarted && <Fields size={fieldSize} />}
+      {isStarted && <Fields size={fieldSize} onFieldHover={handleFieldHover} />}
+      {logs.length > 1 && isStarted && <SquaresLogger logMessages={logs} />}
     </div>
   );
 }

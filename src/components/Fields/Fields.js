@@ -1,9 +1,9 @@
 import React, { useState } from 'react';
 import styles from './Fields.module.css';
 
-export default function Fields({ size }) {
+export default function Fields({ size, onFieldHover }) {
   const fieldsArray = new Array(size).fill('');
-  const [isHoveredField, setHoveredField] = useState(false);
+  const [isHoveredField, setHoveredField] = useState(0);
 
   //   const toggleIsHovered = event => {
   //     if (event) {
@@ -15,10 +15,10 @@ export default function Fields({ size }) {
   const toggleIsHovered = ind => {
     if (ind === isHoveredField) {
       setHoveredField(null);
-      //   console.log(isHoveredField);
+      console.log('isHoveredField1:', isHoveredField);
     } else {
       setHoveredField(ind);
-      //   console.log(isHoveredField);
+      console.log('isHoveredField2:', isHoveredField);
     }
   };
 
@@ -27,21 +27,21 @@ export default function Fields({ size }) {
     if (cell.tagName.toLowerCase() !== 'td') return;
     const row = cell.parentNode.rowIndex;
     const col = cell.cellIndex;
-    // console.log('cell:', cell.tagName);
     console.log('row:', { row: row + 1 });
     console.log('col:', { col: col + 1 });
+    onFieldHover({ row: row + 1, col: col + 1 });
   };
 
-  const blue = '#000';
+  const blue = '#0000ff';
   const white = '#fff';
 
   return (
     <table>
       <tbody>
-        {fieldsArray.map((row, index) => {
+        {fieldsArray.map((item, index) => {
           return (
-            <tr key={row + '-' + index}>
-              {fieldsArray.map((col, ind) => {
+            <tr key={'row-' + index}>
+              {fieldsArray.map((it, ind) => {
                 return (
                   <td
                     className={styles.field}
@@ -50,7 +50,7 @@ export default function Fields({ size }) {
                         ? { backgroundColor: blue }
                         : { backgroundColor: white }
                     }
-                    key={col + '-' + ind}
+                    key={'col-' + ind}
                     onMouseEnter={() => toggleIsHovered(ind)}
                     onMouseLeave={handleMouseLeave}
                   />

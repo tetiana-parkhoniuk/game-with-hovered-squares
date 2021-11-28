@@ -55,14 +55,22 @@ function App() {
 
   return (
     <div className={styles.app}>
-      <ModePicker options={modes} onChange={handleModePickerChange} />
-      <Button
-        text={isStarted ? 'STOP' : 'START'}
-        onClick={handleBtnClick}
-        isDisabled={!fieldSize}
-      />
-      {isStarted && <Fields size={fieldSize} onFieldHover={handleFieldHover} />}
-      {logs.length > 1 && isStarted && <SquaresLogger logMessages={logs} />}
+      <section className={styles.playground}>
+        <div className={styles.optionsContainer}>
+          <ModePicker options={modes} onChange={handleModePickerChange} />
+          <Button
+            text={isStarted ? 'STOP' : 'START'}
+            onClick={handleBtnClick}
+            isDisabled={!fieldSize}
+          />
+        </div>
+        {isStarted && (
+          <Fields size={fieldSize} onFieldHover={handleFieldHover} />
+        )}
+      </section>
+      <section className={styles.logger}>
+        {logs.length > 1 && isStarted && <SquaresLogger logMessages={logs} />}
+      </section>
     </div>
   );
 }

@@ -4,9 +4,9 @@ table {
 td {
   width: 50px;
   height: 50px;
-  outline: 1px solid black;
+  outline: 1px solid #d5d9dd;
 }
 
 /* td:hover {
-  background-color: #0000ff;
+  background-color: #88C5F6;
 } */

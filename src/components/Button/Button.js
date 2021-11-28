@@ -1,6 +1,8 @@
+import styles from './Button.module.css';
+
 export default function Button({ text, onClick, isDisabled }) {
   return (
-    <button onClick={onClick} disabled={isDisabled}>
+    <button className={styles.startBtn} onClick={onClick} disabled={isDisabled}>
       {text}
     </button>
   );

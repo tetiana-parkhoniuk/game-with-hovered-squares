@@ -1,0 +1,17 @@
+.loggerTitle {
+  margin: 0;
+  margin-bottom: 29px;
+}
+
+.loggerList {
+  padding: 0;
+  margin: 0;
+  list-style: none;
+}
+
+.loggerListItem {
+  margin-bottom: 5px;
+  padding: 5px;
+  border-radius: 5px;
+  background-color: #d5d9dd;
+}

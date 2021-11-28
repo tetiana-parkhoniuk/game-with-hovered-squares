@@ -32,7 +32,7 @@ export default function Fields({ size, onFieldHover }) {
     onFieldHover({ row: row + 1, col: col + 1 });
   };
 
-  const blue = '#0000ff';
+  const blue = '#88C5F6';
   const white = '#fff';
 
   return (

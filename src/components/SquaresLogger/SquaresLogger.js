@@ -5,17 +5,11 @@ export default function SquaresLogger({ logMessages }) {
     <>
       <h2 className={styles.loggerTitle}>Hover Squares</h2>
       <ul className={styles.loggerList}>
-        {logMessages.map(
-          (logMessage, index) =>
-            index < 7 && (
-              <li
-                key={'logMessages-' + Math.random() * 123}
-                className={styles.loggerListItem}
-              >
-                {logMessage}
-              </li>
-            ),
-        )}
+        {logMessages.map(logMessage => (
+          <li key={Math.random()} className={styles.loggerListItem}>
+            {logMessage}
+          </li>
+        ))}
       </ul>
     </>
   );

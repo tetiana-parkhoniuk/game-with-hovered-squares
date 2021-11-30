@@ -9,7 +9,6 @@ export default function ModePicker({ options, onChange }) {
   }));
 
   const handleModelChange = selectedMode => {
-    console.log('value:', selectedMode.value);
     onChange(selectedMode.value);
   };
 

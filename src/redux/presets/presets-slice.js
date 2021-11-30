@@ -5,9 +5,6 @@ const presetsSlice = createSlice({
   name: 'presets',
   initialState: {
     modes: [],
-    grid: [],
-    isModeSelected: false,
-    isStarted: false,
     status: null,
     error: null,
   },

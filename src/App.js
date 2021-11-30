@@ -1,9 +1,9 @@
-import React, { useEffect, useState } from 'react';
+import React, { useEffect, useState, useRef } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import { presetsOperations, presetsSelectors } from 'redux/presets';
 import ModePicker from 'components/ModePicker';
 import Button from 'components/Button';
-import Fields from 'components/Fields';
+import GameField from 'components/GameField';
 import SquaresLogger from 'components/SquaresLogger/SquaresLogger';
 import styles from './App.module.css';
 
@@ -13,7 +13,27 @@ function App() {
   const [appMode, setAppMode] = useState();
   const [fieldSize, setFieldSize] = useState();
   const [isStarted, setStarted] = useState(false);
+  const [field, setField] = useState([]);
   const [logs, setLogs] = useState([]);
+  const stateRef = useRef([]);
+
+  stateRef.current = logs;
+
+  const createField = () => {
+    setField(
+      <GameField
+        size={fieldSize}
+        onCellHover={logMessage => {
+          if (stateRef.current.includes(logMessage)) {
+            setLogs(stateRef.current.filter(el => el !== logMessage));
+          } else {
+            setLogs([logMessage, ...stateRef.current]);
+          }
+        }}
+      />,
+    );
+    setLogs([]);
+  };
 
   useEffect(() => {
     dispatch(presetsOperations.fetchPresets());
@@ -22,17 +42,12 @@ function App() {
   useEffect(() => {
     if (appMode) {
       setFieldSize(appMode.size);
-      console.log('appMode2:', appMode);
-      console.log('fieldSize:', fieldSize);
     }
   }, [appMode, fieldSize]);
 
   const handleModePickerChange = selectedMode => {
-    // console.log('handleChangeModes:', modes);
     const newMode = modes.find(({ mode }) => mode === selectedMode);
-    // console.log('newMode:', newMode);
     setAppMode(newMode);
-    // console.log('appMode1:', appMode);
   };
 
   const toggleStart = () => {
@@ -42,14 +57,9 @@ function App() {
   const handleBtnClick = () => {
     if (appMode) {
       setFieldSize(appMode.size);
+      createField();
+      toggleStart();
     }
-    toggleStart();
-    console.log('isStarted:', isStarted);
-    console.log('handleBtnClick:', fieldSize);
-  };
-
-  const handleFieldHover = cell => {
-    setLogs([cell, ...logs]);
   };
 
   return (
@@ -63,12 +73,10 @@ function App() {
             isDisabled={!fieldSize}
           />
         </div>
-        {isStarted && (
-          <Fields size={fieldSize} onFieldHover={handleFieldHover} />
-        )}
+        {isStarted && <div>{field}</div>}
       </section>
       <section className={styles.logger}>
-        {logs.length > 1 && isStarted && <SquaresLogger logMessages={logs} />}
+        {logs.length > 0 && isStarted && <SquaresLogger logMessages={logs} />}
       </section>
     </div>
   );

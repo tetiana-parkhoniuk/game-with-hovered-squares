@@ -48,9 +48,8 @@ function App() {
     console.log('handleBtnClick:', fieldSize);
   };
 
-  const handleFieldHover = ({ row, col }) => {
-    const logText = `row ${row} col ${col}`;
-    setLogs([logText, ...logs]);
+  const handleFieldHover = cell => {
+    setLogs([cell, ...logs]);
   };
 
   return (

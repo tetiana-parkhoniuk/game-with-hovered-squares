@@ -1,4 +1,5 @@
 import React from 'react';
+import propTypes from 'prop-types';
 import Select from 'react-select';
 import styles from './ModePicker.module.css';
 
@@ -11,7 +12,6 @@ export default function ModePicker({ options, onChange }) {
   const handleModelChange = selectedMode => {
     onChange(selectedMode.value);
   };
-  //test
 
   return (
     <Select
@@ -22,3 +22,8 @@ export default function ModePicker({ options, onChange }) {
     />
   );
 }
+
+ModePicker.propTypes = {
+  options: propTypes.array.isRequired,
+  onChange: propTypes.func.isRequired,
+};

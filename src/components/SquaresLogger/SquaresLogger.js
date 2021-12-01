@@ -1,3 +1,4 @@
+import propTypes from 'prop-types';
 import styles from './SquaresLogger.module.css';
 
 export default function SquaresLogger({ logMessages }) {
@@ -14,3 +15,7 @@ export default function SquaresLogger({ logMessages }) {
     </>
   );
 }
+
+SquaresLogger.propTypes = {
+  logMessages: propTypes.array.isRequired,
+};

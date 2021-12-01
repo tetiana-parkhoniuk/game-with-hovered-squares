@@ -1,3 +1,4 @@
+import propTypes from 'prop-types';
 import styles from './Button.module.css';
 
 export default function Button({ text, onClick, isDisabled }) {
@@ -7,3 +8,9 @@ export default function Button({ text, onClick, isDisabled }) {
     </button>
   );
 }
+
+Button.propTypes = {
+  text: propTypes.string.isRequired,
+  onClick: propTypes.func.isRequired,
+  isDisabled: propTypes.bool.isRequired,
+};

@@ -1,3 +1,4 @@
+import propTypes from 'prop-types';
 import styles from './GameField.module.css';
 
 export default function GameField({ size, onCellHover }) {
@@ -46,3 +47,8 @@ export default function GameField({ size, onCellHover }) {
     </table>
   );
 }
+
+GameField.propTypes = {
+  size: propTypes.number.isRequired,
+  onCellHover: propTypes.func.isRequired,
+};
